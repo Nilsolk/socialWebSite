@@ -1,6 +1,9 @@
-{% extends "base.html" %}
- {% block title %}Board{% endblock %}
- {% block content %}
+{% extends 'base.html' %}
+{% block title %}
+  Board
+{% endblock %}
+{% block content %}
+  <a href="{% url 'password_change' %}">Change password</a>
   <h1>Board</h1>
   <p>Здесь будут ваши посты</p>
- {% endblock %}
+{% endblock %}
