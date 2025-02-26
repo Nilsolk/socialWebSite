@@ -40,5 +40,10 @@ def register(request):
             return render(request, 'registration/register_done.html', {'new_user': user})
 
     else:
-        user_from = RegistrationForm()
+        user_form = RegistrationForm()
     return render(request, 'registration/register.html', context = {'register_form': user_form})
+
+
+@login_required
+def profile(request):
+    return render(request, "profile.html")

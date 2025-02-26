@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<h1>Your Profile</h1>
+
+<p><strong>Username:</strong> {{ user.username }}</p>
+<p><strong>Email:</strong> {{ user.email }}</p>
+<p><strong>Name:</strong> {{ user.first_name|default:"Не указано" }}</p>
+<p><strong>Дата регистрации:</strong> {{ user.date_joined|date:"d.m.Y" }}</p>
+
+<a href="{% url 'password_change' %}">Сменить пароль</a> |
+<a href="{% url 'logout_view' %}">Выйти</a>
+
+{% endblock %}
