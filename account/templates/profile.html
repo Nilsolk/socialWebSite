@@ -1,15 +1,37 @@
 {% extends "base.html" %}
-{% block title %}Profile{% endblock %}
+
+{% block title %}Профиль{% endblock %}
 
 {% block content %}
-<h1>Your Profile</h1>
+<h1>Ваш профиль</h1>
+<div id="editProfile" class="profile-section">
+    <h2>{{user.username}}</h2>
+    <h2>{{user.first_name}}</h2>
+    <h2>{{user.email}}</h2>
 
-<p><strong>Username:</strong> {{ user.username }}</p>
-<p><strong>Email:</strong> {{ user.email }}</p>
-<p><strong>Name:</strong> {{ user.first_name|default:"Не указано" }}</p>
-<p><strong>Дата регистрации:</strong> {{ user.date_joined|date:"d.m.Y" }}</p>
+</div>
 
-<a href="{% url 'password_change' %}">Сменить пароль</a> |
-<a href="{% url 'logout_view' %}">Выйти</a>
+<div id="myPosts" class="profile-section">
+    <h2>Your Posts</h2>
+    <div class="image-feed">
+        {% for image in user.images.all %}
+        <div class="image-item">
+            <img src="{{ image.image.url }}" alt="Image" width="300">
+            <p>{{ image.description }}</p>
+            <p>Опубликовано {{ image.author.username }}</p>
+        </div>
+        {% empty %}
+        <p>У вас еще нет постов</p>
+        {% endfor %}
+    </div>
+</div>
 
+<div id="uploadImage" class="profile-section">
+    <h2>Опубликовать новый пост</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ image_form.as_p }}
+        <button type="submit">Опубликовать пост</button>
+    </form>
+</div>
 {% endblock %}

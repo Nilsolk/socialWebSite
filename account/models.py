@@ -1,3 +1,12 @@
 from django.db import models
+from django.contrib.auth.models import User
 
-# Create your models here.
+class Image(models.Model):
+    image = models.ImageField()
+    description = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="images")
+    likes = models.ManyToManyField(User, related_name="liked_images", blank=True)
+
+    def __str__(self):
+        return f"Image {self.id} by {self.author.username}"

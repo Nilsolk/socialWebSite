@@ -2,16 +2,18 @@
  <html>
  <head>
   <title>{% block title %}{% endblock %}</title>
-  <link href="{% static "css/base.css" %}" rel="stylesheet">
+  <link href="{% static 'css/base.css' %}" rel="stylesheet">
  </head>
  <body>
   <div id="header">
     {% if request.user.is_authenticated %}
         Hello {{ request.user.first_name }},
-        <a href="{% url 'profile' %}">Profile</a>
-        <a href="{% url 'logout_view' %}">Logout</a>
+        <a href="{% url 'board' %}">На главную</a>
+        <a href="{% url 'profile' %}">Профиль</a>
+        <a href="{% url 'logout_view' %}">Выход</a>
+        <a href="{% url 'password_change' %}">Смена пароля</a> |
     {% else %}
-        <a href="{% url "login_view" %}">Log-in</a>
+        <a href="{% url 'login_view' %}">Логин</a>
     {% endif %}
  </div>
  <div id="content">

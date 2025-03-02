@@ -1,9 +1,31 @@
 {% extends 'base.html' %}
+
 {% block title %}
   Board
 {% endblock %}
+
 {% block content %}
-  <a href="{% url 'password_change' %}">Change password</a>
   <h1>Board</h1>
+
   <p>Здесь будут ваши посты</p>
+
+  <div class="image-feed">
+    {% for image in images %}
+      <div class="image-item">
+        <img src="{{ image.image.url }}" alt="Image" width="300">
+        <p>{{ image.description }}</p>
+        <p>Posted by {{ image.author.username }}</p>
+
+        <p>
+          {% if user in image.likes.all %}
+            <a href="{% url 'like_image' image.id %}">Unlike</a>
+          {% else %}
+            <a href="{% url 'like_image' image.id %}">Like</a>
+          {% endif %}
+        </p>
+
+        <p>{{ image.likes.count }} Likes</p>
+      </div>
+    {% endfor %}
+  </div>
 {% endblock %}

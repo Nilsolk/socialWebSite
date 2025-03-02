@@ -172,9 +172,6 @@ ul.messages li.warning { background: #f39c12; }
     font-size: 16px;
 }
 
-.social li.facebook { background: #3b5998; }
-.social li.twitter { background: #1da1f2; }
-.social li.google { background: #db4437; }
 
 /* Изображения */
 .image-preview, .image-detail {
@@ -240,6 +237,44 @@ ul.messages li.warning { background: #f39c12; }
 #people-list .info {
     font-size: 14px;
     color: #555;
+}
+
+.profile-nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.profile-nav li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.profile-nav a {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 18px;
+}
+
+.profile-nav a:hover {
+    text-decoration: underline;
+}
+
+.profile-section {
+    margin-top: 30px;
+}
+
+.image-feed {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.image-item {
+    border: 1px solid #ddd;
+    padding: 10px;
+    max-width: 300px;
+    text-align: center;
+    background-color: #f9f9f9;
 }
 
 /* Адаптивность */

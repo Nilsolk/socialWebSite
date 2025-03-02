@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
+from .models import Image
 
 class LoginForm(forms.Form):
     username = forms.CharField()
@@ -14,3 +15,7 @@ class RegistrationForm(forms.ModelForm):
         model = User
         fields = ['username', 'first_name', 'email']
 
+class ImageForm(forms.ModelForm):
+    class Meta:
+        model = Image
+        fields = ['image', 'description']
