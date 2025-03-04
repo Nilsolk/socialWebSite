@@ -10,8 +10,6 @@
         Hello {{ request.user.first_name }},
         <a href="{% url 'board' %}">На главную</a>
         <a href="{% url 'profile' %}">Профиль</a>
-        <a href="{% url 'logout_view' %}">Выход</a>
-        <a href="{% url 'password_change' %}">Смена пароля</a> |
     {% else %}
         <a href="{% url 'login_view' %}">Логин</a>
     {% endif %}

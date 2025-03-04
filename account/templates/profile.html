@@ -5,17 +5,24 @@
 {% block content %}
 <h1>Ваш профиль</h1>
 <div id="editProfile" class="profile-section">
-    <h2>{{user.username}}</h2>
-    <h2>{{user.first_name}}</h2>
-    <h2>{{user.email}}</h2>
-
+    <div class="profile-info">
+        <div class="profile-details">
+            <p><strong>Имя пользователя:</strong> {{ user.username }}</p>
+            <p><strong>Имя:</strong> {{ user.first_name }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>Количество постов:</strong> {{ user.images.count }}</p>
+            <p><a href="{% url 'edit_profile' %}" class="edit-button">Редактировать профиль</a></p>
+            <p><a href="{% url 'password_change' %}" class="edit-button">Сменить пароль</a></p>
+        </div>
+    </div>
 </div>
 
 <div id="myPosts" class="profile-section">
-    <h2>Your Posts</h2>
+    <h2>Ваши посты</h2>
     <div class="image-feed">
         {% for image in user.images.all %}
         <div class="image-item">
+            <a href="{% url 'delete_item' image.id %}" class="delete-button">Удалить</a>
             <img src="{{ image.image.url }}" alt="Image" width="300">
             <p>{{ image.description }}</p>
             <p>Опубликовано {{ image.author.username }}</p>

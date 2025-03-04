@@ -11,4 +11,7 @@ urlpatterns = [
     path('', views.dashboard, name='board'),
     path('profile/', views.profile, name="profile"), 
     path('like/<int:image_id>/', views.like_image, name='like_image'),
+    path('delete_item/<int:image_id>/', views.delete_item, name ='delete_item'),
+    path('profile/edit/', views.edit_profile, name='edit_profile'),
+    path('user/<int:user_id>/', views.user_profile, name='user_profile'),
 ]

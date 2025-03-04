@@ -1,16 +1,24 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
-from .forms import RegistrationForm, ImageForm
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.models import User 
+from .forms import RegistrationForm, ImageForm, ProfileEditForm
 from .models import Image
 from django.contrib.auth.decorators import login_required
 
 @login_required
 def dashboard(request):
-    images = Image.objects.all().order_by('-created_at')
+    images = Image.objects.all().order_by('-created_at') 
+    users = User.objects.exclude(id=request.user.id)
+
     context = {
         'images': images,
+        'users': users, 
     }
     return render(request, 'board.html', context)
+
+
+def delete_item(request, image_id):
+    image = get_object_or_404(Image, pk = image_id).delete()
+    return redirect('profile')
 
 def register(request):
     if request.method == "POST":
@@ -51,3 +59,25 @@ def like_image(request, image_id):
         image.likes.add(request.user)
     return redirect('board')
 
+@login_required
+def edit_profile(request):
+    if request.method == 'POST':
+        form = ProfileEditForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = ProfileEditForm(instance=request.user)
+    
+    return render(request, 'edit_profile.html', {'form': form})
+
+@login_required
+def user_profile(request, user_id):
+    user = get_object_or_404(User, id=user_id)
+    user_posts = Image.objects.filter(author=user).order_by('-created_at')  # Все посты пользователя
+    
+    context = {
+        'profile_user': user, 
+        'user_posts': user_posts, 
+    }
+    return render(request, 'user_profile.html', context)

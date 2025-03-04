@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="profile-container">
+        <h2>Профиль {{ profile_user.username }}</h2>
+        <p>Email: {{ profile_user.email }}</p>
+
+        <div class="profile-nav">
+            <ul>
+                <li><a href="{% url 'board' %}">Назад к ленте</a></li>
+            </ul>
+        </div>
+
+        <div class="profile-section">
+            <h3>Посты {{ profile_user.username }}</h3>
+            <div class="image-feed">
+                {% for post in user_posts %}
+                    <div class="image-item">
+                        <img src="{{ post.image.url }}" alt="User post" width="300">
+                        <p>Опубликовано: {{ post.created_at }}</p>
+                    </div>
+                {% empty %}
+                    <p>У пользователя пока нет постов.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
