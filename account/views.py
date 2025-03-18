@@ -74,7 +74,7 @@ def edit_profile(request):
 @login_required
 def user_profile(request, user_id):
     user = get_object_or_404(User, id=user_id)
-    user_posts = Image.objects.filter(author=user).order_by('-created_at')  # Все посты пользователя
+    user_posts = Image.objects.filter(author=user).order_by('-created_at')
     
     context = {
         'profile_user': user, 

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Корзина</h1>
+<ul>
+    {% for item in cart_items %}
+        <li>
+            <h2>{{ item.product.name }}</h2>
+            <p>Количество: {{ item.quantity }}</p>
+            <p>Цена: {{ item.product.price }} руб.</p>
+        </li>
+    {% endfor %}
+</ul>
+<p>Общая стоимость: {{ total_price }} руб.</p>
+<a href="{% url 'catalog:product_list' %}">Вернуться к каталогу</a>
+{% endblock %}

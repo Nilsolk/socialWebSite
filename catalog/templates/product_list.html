@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Каталог товаров</h1>
+<ul>
+    {% for product in products %}
+        <li>
+            <h2>{{ product.name }}</h2>
+            {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" style="max-width: 200px; height: auto;">
+        {% else %}
+            <p>Изображение отсутствует</p>
+        {% endif %}
+            <p>{{ product.description|truncatechars:100 }}</p>
+            <p>Цена: {{ product.price }} руб.</p>
+            <form action="{% url 'catalog:add_to_cart' product.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Добавить в корзину</button>
+            </form>
+        </li>
+    {% endfor %}
+</ul>
+<a href="{% url 'catalog:view_cart' %}">Перейти в корзину</a>
+{% endblock %}
