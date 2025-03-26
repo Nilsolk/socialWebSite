@@ -12,4 +12,11 @@
 </ul>
 <p>Общая стоимость: {{ total_price }} руб.</p>
 <a href="{% url 'catalog:product_list' %}">Вернуться к каталогу</a>
+
+{% if cart_items %}
+    <form action="{% url 'catalog:checkout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Оформить заказ</button>
+    </form>
+{% endif %}
 {% endblock %}

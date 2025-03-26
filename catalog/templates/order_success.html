@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}Заказ успешно оформлен{% endblock %}
+
+{% block content %}
+<h1>Спасибо за ваш заказ!</h1>
+<p>Ваш заказ успешно оформлен. В ближайшее время мы свяжемся с вами для подтверждения.</p>
+<a href="{% url 'catalog:product_list' %}">Вернуться в каталог</a>
+<a href="{% url 'catalog:order_list' %}">Перейти к моим заказам</a>
+{% endblock %}

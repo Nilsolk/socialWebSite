@@ -11,6 +11,7 @@
         <a href="{% url 'board' %}">На главную</a>
         <a href="{% url 'catalog:product_list' %}">Каталог</a>
         <a href="{% url 'catalog:view_cart' %}">Корзина</a>
+        <a href="{% url 'catalog:order_list' %}">Мои заказы</a>
         <a href="{% url 'profile' %}">Профиль</a>
     {% else %}
         <a href="{% url 'login_view' %}">Логин</a>
